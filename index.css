@@ -198,3 +198,24 @@
      border-radius: 15px;
      font-size: 0.9rem;
  }
+
+ .social-icon {
+     color: #fff !important;
+     font-size: 1.3rem;
+     margin: 0 10px;
+     transition: all 0.3s;
+     display: inline-block;
+ }
+
+ .social-icon:hover {
+     color: #ffd700 !important;
+     transform: scale(1.2);
+ }
+
+ .social-icon .fa-facebook:hover {
+     color: #1877f2 !important;
+ }
+
+ .social-icon .fa-instagram:hover {
+     color: #e4405f !important;
+ }
