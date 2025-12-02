@@ -35,7 +35,81 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
           )
           .join("");
       }
+function loadProducts() {
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+    
+    // إضافة منتجات افتراضية لو مفيش منتجات
+    if (products.length === 0) {
+        products = [
+            {
+                id: 1,
+                name: "Rolex Submariner",
+                description: "Luxury diving watch with exceptional craftsmanship",
+                price: 12500,
+                image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=500"
+            },
+            {
+                id: 2,
+                name: "Omega Seamaster",
+                description: "Professional diver's watch with style",
+                price: 8900,
+                image: "https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=500"
+            },
+            {
+                id: 3,
+                name: "TAG Heuer Carrera",
+                description: "Swiss chronograph with racing heritage",
+                price: 5200,
+                image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500"
+            },
+            {
+                id: 4,
+                name: "Patek Philippe Nautilus",
+                description: "Iconic luxury sports watch design",
+                price: 35000,
+                image: "https://images.unsplash.com/photo-1606390090711-27fca7d3c50e?w=500"
+            },
+            {
+                id: 5,
+                name: "Audemars Piguet Royal Oak",
+                description: "Legendary octagonal bezel timepiece",
+                price: 28500,
+                image: "https://images.unsplash.com/photo-1622434641406-a158123450f9?w=500"
+            },
+            {
+                id: 6,
+                name: "Cartier Santos",
+                description: "Classic square case with exposed screws",
+                price: 7800,
+                image: "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?w=500"
+            }
+        ];
+        
+        localStorage.setItem('products', JSON.stringify(products));
+    }
+    
+    const container = document.getElementById('productsContainer');
+    
+    container.innerHTML = products.map(product => `
+        <div class="col-md-4">
+            <div class="product-card">
+                <img src="${product.image}" class="product-img" alt="${product.name}">
+                <div class="product-body">
+                    <h5 class="product-title">${product.name}</h5>
+                    <p class="text-muted">${product.description}</p>
+                    <div class="product-price">$${product.price}</div>
+                    <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
 
+// استدعاء الدالة قبل تحميل المنتجات
+initDefaultProducts();
+loadProducts();
       function addToCart(productId) {
         const products = JSON.parse(localStorage.getItem("products")) || [];
         const product = products.find((p) => p.id === productId);
